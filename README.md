@@ -10,13 +10,13 @@ https://jeevan1978.github.io/portfolio/
 
 ## 🧾 Features
 
-- 🎬 **Cinematic intro animation** with *Domain Expansion* theme  
-- ✨ **Hero section** with glitch text & animated background rings  
-- 👤 **Sorcerer Profile (About section)** with glowing framed photo  
-- 🧠 **Cursed Techniques (Skills)** section  
-- 🏆 **Achievements preview** linking to full LinkedIn timeline  
-- 💬 Themed **Shikigami Chat UI** (front-end only by default)  
-- 📬 **Contact & Socials**
+-  **Cinematic intro animation** with *Domain Expansion* theme  
+-  **Hero section** with glitch text & animated background rings  
+-  **Sorcerer Profile (About section)** with glowing framed photo  
+-  **Cursed Techniques (Skills)** section  
+-  **Achievements preview** linking to full LinkedIn timeline  
+-  Themed **Shikigami Chat UI** (front-end only by default)  
+-  **Contact & Socials**
   - Email
   - Phone
   - LinkedIn
@@ -48,7 +48,7 @@ https://jeevan1978.github.io/portfolio/
 
 ---
 
-## 🚀 Running Locally
+##  Running Locally
 
 ### Static (Recommended)
 For a quick preview:
