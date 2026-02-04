@@ -1,0 +1,13 @@
+{
+  "name": "jeevan-portfolio-domain-expansion",
+  "version": "1.0.0",
+  "description": "Personal portfolio (Domain Expansion theme) with a simple Node.js backend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
+

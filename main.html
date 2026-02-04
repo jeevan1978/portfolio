@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeevan Reddy T | Domain Expansion</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Nosifer&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --cursed-red: #ff0000;
+            --dark-red: #4a0000;
+            --black: #050505;
+            --white: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            /* Hide scrollbar during intro */
+            overflow-y: hidden; 
+        }
+        
+        body.intro-finished {
+            overflow-y: auto;
+            cursor: crosshair;
+        }
+
+        h1, h2, h3, .cursed-font {
+            font-family: 'Cinzel', serif;
+        }
+
+        .title-font {
+            font-family: 'Nosifer', cursive;
+        }
+
+        /* --- 🎬 Custom Animation Intro Styles --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: opacity 1s ease-out, visibility 1s;
+        }
+
+        #intro-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* 1. The Eye */
+        .shrine-eye {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff0000 30%, #4a0000 70%, #000 100%);
+            box-shadow: 0 0 50px #ff0000;
+            opacity: 0;
+            transition: all 0.5s ease-out;
+            z-index: 10;
+        }
+
+        .shrine-eye.active {
+            width: 150px;
+            height: 150px;
+            opacity: 1;
+            box-shadow: 0 0 100px #ff0000, inset 0 0 30px #000;
+        }
+
+        .shrine-eye::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; height: 20%;
+            background: #000;
+            opacity: 0; /* Eyelid opens */
+            transition: 0.3s;
+        }
+
+        /* 2. The Ribs (Shrine Gate) */
+        .shrine-rib {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            border: 5px solid #4a0000;
+            border-bottom: none;
+            border-radius: 100px 100px 0 0;
+            opacity: 0;
+            transition: all 1s ease-out;
+            box-shadow: 0 -10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .shrine-rib.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* 3. Text Effect */
+        .intro-text-container {
+            position: absolute;
+            bottom: 20%;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+            opacity: 0;
+        }
+
+        .intro-text-jp {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            color: transparent;
+            -webkit-text-stroke: 2px red;
+            font-weight: 900;
+            letter-spacing: 10px;
+            transform: scale(1.5);
+            transition: transform 0.2s;
+        }
+        
+        .intro-text-en {
+            font-family: 'Nosifer', cursive;
+            color: white;
+            font-size: 2rem;
+            text-shadow: 0 0 10px red;
+            margin-top: -20px;
+        }
+
+        /* 4. The Slash (Cleave) */
+        .cleave-line {
+            position: absolute;
+            background: white;
+            box-shadow: 0 0 20px white, 0 0 40px red;
+            opacity: 0;
+            z-index: 50;
+        }
+
+        /* Animation Keyframes for Sequence */
+        @keyframes shockwave {
+            0% { transform: scale(1); border-width: 2px; opacity: 1; }
+            100% { transform: scale(20); border-width: 0; opacity: 0; }
+        }
+
+        .shockwave {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+        }
+
+        .skip-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--cursed-red);
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Cinzel', serif;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .skip-btn:hover {
+            background: var(--cursed-red);
+            box-shadow: 0 0 15px var(--cursed-red);
+        }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark-red);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cursed-red);
+        }
+
+        /* --- Hero Animations --- */
+        .domain-bg {
+            background: radial-gradient(circle at center, #1a0000 0%, #000000 70%);
+        }
+
+        /* Glitch Text Effect */
+        .glitch {
+            position: relative;
+            color: white;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(14px, 9999px, 127px, 0); }
+            20% { clip: rect(80px, 9999px, 13px, 0); }
+            40% { clip: rect(30px, 9999px, 86px, 0); }
+            60% { clip: rect(69px, 9999px, 148px, 0); }
+            80% { clip: rect(2px, 9999px, 20px, 0); }
+            100% { clip: rect(110px, 9999px, 130px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            100% { clip: rect(10px, 9999px, 60px, 0); }
+        }
+
+        /* Subtle orbit animation for hero rings */
+        @keyframes spin-orbit {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* --- Card Styles --- */
+        .cursed-card {
+            background: rgba(10, 0, 0, 0.7);
+            border: 1px solid #330000;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cursed-card:hover {
+            border-color: var(--cursed-red);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* --- Button Effects --- */
+        .btn-domain {
+            position: relative;
+            background: transparent;
+            color: var(--cursed-red);
+            border: 2px solid var(--cursed-red);
+            overflow: hidden;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        
+        .btn-domain::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            background: var(--cursed-red);
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: 0.3s;
+        }
+
+        .btn-domain:hover::after {
+            width: 100%;
+        }
+
+        .btn-domain:hover {
+            color: black;
+            box-shadow: 0 0 25px var(--cursed-red);
+        }
+
+        /* --- Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Photo Glow */
+        .photo-glow {
+            position: relative;
+            display: inline-block;
+        }
+        .photo-glow::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(45deg, #ff0000, #4a0000, #000000);
+            z-index: -1;
+            filter: blur(10px);
+            animation: rotateGlow 3s linear infinite;
+        }
+        @keyframes rotateGlow {
+            0% { filter: hue-rotate(0deg) blur(10px); }
+            100% { filter: hue-rotate(360deg) blur(10px); }
+        }
+
+        /* Mobile typography tweaks */
+        @media (max-width: 640px) {
+            .intro-text-jp {
+                font-size: 3rem;
+                letter-spacing: 0.2em;
+            }
+
+            .intro-text-en {
+                font-size: 1.25rem;
+            }
+
+            /* Soften heavy glitch on small screens */
+            .glitch::before,
+            .glitch::after {
+                display: none;
+            }
+        }
+
+        /* --- 💬 Shikigami Chatbot Styles --- */
+        .shikigami-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: black;
+            border: 2px solid var(--cursed-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 50;
+            box-shadow: 0 0 15px var(--cursed-red);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .shikigami-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--cursed-red);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 6.5rem;
+            right: 2rem;
+            width: 350px;
+            height: 500px;
+            background-color: rgba(5, 5, 5, 0.95);
+            border: 2px solid var(--cursed-red);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-window.open {
+            transform: scale(1);
+        }
+
+        .chat-header {
+            padding: 1rem;
+            background: var(--dark-red);
+            border-bottom: 1px solid var(--cursed-red);
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-message.bot {
+            align-self: flex-start;
+            background-color: #1a0000;
+            border: 1px solid var(--dark-red);
+            color: #ddd;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            background-color: var(--cursed-red);
+            color: black;
+            font-weight: 600;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--dark-red);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            background: transparent;
+            border: 1px solid var(--dark-red);
+            padding: 0.5rem;
+            color: white;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--cursed-red);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-red-900 selection:text-white">
+
+    <!-- 🎥 ANIMATED INTRO SECTION (CSS Generated) -->
+    <div id="intro-overlay">
+        <!-- The Shrine Eye -->
+        <div id="shrine-eye" class="shrine-eye"></div>
+        
+        <!-- The Shrine Ribs (Gate) -->
+        <div class="shrine-rib" style="width: 300px; height: 300px; border-width: 4px;"></div>
+        <div class="shrine-rib" style="width: 500px; height: 500px; border-width: 8px; transition-delay: 0.1s;"></div>
+        <div class="shrine-rib" style="width: 700px; height: 700px; border-width: 12px; transition-delay: 0.2s;"></div>
+        <div class="shrine-rib" style="width: 1200px; height: 1200px; border-width: 20px; border-color: #ff0000; opacity: 0; transition-delay: 0.3s;"></div>
+
+        <!-- Text Overlay -->
+        <div id="intro-text" class="intro-text-container">
+            <div class="intro-text-jp">領域展開</div>
+            <div class="intro-text-en">DOMAIN EXPANSION</div>
+        </div>
+
+        <button id="skip-btn" class="skip-btn">Skip Intro</button>
+    </div>
+
+    <!-- Navigation (Hidden initially, shown after intro) -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center backdrop-blur-sm bg-black/50 border-b border-red-900/30 opacity-0 transition-opacity duration-1000">
+        <span class="text-xl font-bold tracking-widest text-red-600">JR.</span>
+        <div class="space-x-6 text-sm md:text-base hidden md:block">
+            <a href="#about" class="hover:text-red-500 transition-colors">Archive</a>
+            <a href="#skills" class="hover:text-red-500 transition-colors">Techniques</a>
+            <a href="#connect" class="hover:text-red-500 transition-colors">Pact</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="hero" class="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden domain-bg opacity-0 transition-opacity duration-1000">
+        
+        <!-- Abstract CSS Background (replaces particles for cleaner look post-video) -->
+        <div class="absolute inset-0 z-0 opacity-40">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vh] h-[80vh] border border-red-900/30 rounded-full animate-pulse"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] border border-red-800/20 rounded-full" style="animation: spin-orbit 18s linear infinite;"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 px-4">
+            <p class="text-red-500 tracking-[0.3em] text-sm md:text-lg mb-4 uppercase">
+                System Logic Override
+            </p>
+            
+            <h1 class="text-5xl md:text-8xl font-black mb-2 glitch uppercase" data-text="Domain Expansion">
+                Domain Expansion
+            </h1>
+            
+            <h2 class="text-2xl md:text-4xl text-gray-300 font-light mb-6 cursed-font">
+                Malevolent <span class="text-red-600 font-bold">Code</span>
+            </h2>
+
+            <div class="w-24 h-1 bg-red-600 mx-auto mb-8 shadow-[0_0_15px_red]"></div>
+
+            <div class="text-center mb-10">
+                <h3 class="text-xl md:text-3xl font-bold text-white mb-2">JEEVAN REDDY T</h3>
+                <p class="text-gray-400">B.Tech CSE Student | <span class="text-red-500">Turning Logic Into Power</span></p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <button onclick="scrollToSection('skills')" class="btn-domain px-8 py-3 font-bold tracking-widest uppercase text-sm cursor-pointer">
+                    Enter My Domain
+                </button>
+                <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing" target="_blank" class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors border-b border-transparent hover:border-red-500 pb-1">
+                    <i class="fa-solid fa-file-pdf text-red-500 group-hover:animate-bounce"></i>
+                    View Resume
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-red-600 text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="relative py-20 px-6 bg-black border-t border-red-900/20">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+                
+                <!-- 📷 PROFILE PHOTO -->
+                <div class="reveal flex justify-center md:justify-end">
+                    <div class="photo-glow rounded-lg">
+                        <!-- UPDATED: Replaced with the uploaded file name -->
+                        <img 
+                            src="jeevan_passport size photo.png" 
+                            alt="Jeevan Reddy T" 
+                            class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg border-2 border-red-900 grayscale hover:grayscale-0 transition-all duration-500"
+                            onerror="this.src='https://ui-avatars.com/api/?name=Jeevan+Reddy&background=330000&color=ff0000&size=256'"
+                        >
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="md:col-span-2 reveal">
+                    <h2 class="text-4xl font-bold text-white mb-4 cursed-font"><span class="text-red-600">Sorcerer</span> Profile</h2>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-300">Jeevan Reddy T</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        As a Computer Science Engineering student, I don't just write code; I construct logic. 
+                        My domain specializes in untangling complex algorithmic knots and forging immutable ledgers on the blockchain.
+                        Like a sorcerer refining their cursed energy, I refine data structures for optimal performance.
+                    </p>
+                    
+                    <div class="flex gap-4">
+                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                            CSE 2027
+                        </div>
+                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                            Blockchain
+                        </div>
+                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                            DSA
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="relative py-20 px-6 bg-[#0a0000]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 cursed-font">Cursed <span class="text-red-600">Techniques</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+                <!-- Card 1 -->
+                <div class="cursed-card p-6 rounded-lg group">
+                    <div class="flex items-center gap-4 mb-3">
+                        <i class="fa-solid fa-brain text-2xl text-red-600 group-hover:animate-pulse"></i>
+                        <h4 class="text-xl font-bold">Data Structures & Algorithms</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Mastering the core logic. Solving complex problems on LeetCode and optimizing time complexity.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="cursed-card p-6 rounded-lg group">
+                    <div class="flex items-center gap-4 mb-3">
+                        <i class="fa-brands fa-ethereum text-2xl text-red-600 group-hover:animate-pulse"></i>
+                        <h4 class="text-xl font-bold">Blockchain Development</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Building decentralized applications (dApps) and smart contracts. Immutable, transparent, secure.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="cursed-card p-6 rounded-lg group">
+                    <div class="flex items-center gap-4 mb-3">
+                        <i class="fa-solid fa-laptop-code text-2xl text-red-600 group-hover:animate-pulse"></i>
+                        <h4 class="text-xl font-bold">Competitive Programming</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Participating in coding contests to sharpen logic and speed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONNECT / CONTACT SECTION -->
+    <section id="connect" class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-900/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10 reveal">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 uppercase glitch" data-text="Form A Pact">Form A Pact</h2>
+                <p class="text-xl text-gray-300">Reach out for collaborations, internships, or projects.</p>
+            </div>
+
+            <!-- Contact + Socials -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+                <!-- Direct contact -->
+                <div class="md:col-span-2 cursed-card rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Direct Contact</h3>
+                    <div class="space-y-3 text-gray-300 text-sm md:text-base">
+                        <p>
+                            <span class="font-semibold text-red-400">Email:</span>
+                            <a href="mailto:tjreddy291@gamil.com" class="hover:text-red-400 underline underline-offset-4">
+                                tjreddy291@gamil.com
+                            </a>
+                        </p>
+                        <p>
+                            <span class="font-semibold text-red-400">Phone:</span>
+                            <a href="tel:+918096450457" class="hover:text-red-400 underline underline-offset-4">
+                                +91 8096450457
+                            </a>
+                        </p>
+                        <p class="text-xs text-gray-500 mt-4">
+                            Available for remote opportunities, internships, and hackathon teams.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social orbs -->
+                <div class="flex flex-col items-center justify-center gap-6">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                            <i class="fa-brands fa-linkedin-in text-xl md:text-2xl"></i>
+                        </a>
+                        
+                        <!-- GitHub -->
+                        <a href="https://github.com/jeevan1978" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                            <i class="fa-brands fa-github text-xl md:text-2xl"></i>
+                        </a>
+
+                        <!-- LeetCode -->
+                        <a href="https://leetcode.com/u/jeevan2006/" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                            <i class="fa-solid fa-code text-lg md:text-xl"></i>
+                        </a>
+                    </div>
+
+                    <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing" target="_blank" class="btn-domain px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm">
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- Achievements preview -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="cursed-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Highlights</h3>
+                    <p class="text-gray-400 text-sm mb-3">
+                        A snapshot of achievements and milestones. For the full cursed record, explore the LinkedIn profile.
+                    </p>
+                    <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank" class="inline-flex items-center gap-2 text-red-400 text-sm hover:text-red-300 underline underline-offset-4">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        View complete achievement timeline
+                    </a>
+                </div>
+                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
+                    <h4 class="font-semibold text-white mb-2">Technical Growth</h4>
+                    <p>
+                        Consistent practice in DSA, blockchain fundamentals, and competitive programming, reflected through problem-solving activity and projects shared on LinkedIn and GitHub.
+                    </p>
+                </div>
+                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
+                    <h4 class="font-semibold text-white mb-2">Community & Learning</h4>
+                    <p>
+                        Participating in online courses, hackathons, and coding communities. Details and certificates are curated on the LinkedIn profile.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-6 border-t border-red-900/30 text-center">
+        <p class="text-gray-600 text-sm">
+            &copy; 2026 Jeevan Reddy T. <br>
+            <span class="text-red-900 text-xs">Domain Type: Malevolent Shrine</span>
+        </p>
+    </footer>
+
+    <!-- 🔮 SHIKIGAMI CHAT UI -->
+    <button id="shikigami-toggle" class="shikigami-btn">
+        <i class="fa-solid fa-message text-red-600 text-xl"></i>
+    </button>
+
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <span class="text-white font-bold tracking-wider cursed-font">✨ Summon Shikigami</span>
+            <button id="close-chat" class="text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div id="chat-messages" class="chat-body">
+            <div class="chat-message bot">
+                I am the Shikigami guarding this domain. Ask me about Jeevan's skills or techniques... if you dare.
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="user-input" class="chat-input" placeholder="Ask a question..." onkeydown="if(event.key === 'Enter') sendMessage()">
+            <button onclick="sendMessage()" class="text-red-600 hover:text-white px-2">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Custom Animation Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('intro-overlay');
+            const eye = document.getElementById('shrine-eye');
+            const ribs = document.querySelectorAll('.shrine-rib');
+            const text = document.getElementById('intro-text');
+            const skipBtn = document.getElementById('skip-btn');
+            
+            const hero = document.getElementById('hero');
+            const navbar = document.getElementById('navbar');
+
+            let animationTimeouts = [];
+
+            // Helper to handle skip/end
+            function finishIntro() {
+                // Clear any pending animations
+                animationTimeouts.forEach(t => clearTimeout(t));
+
+                overlay.classList.add('fade-out');
+                document.body.classList.add('intro-finished');
+                
+                // Fade in main elements
+                hero.style.opacity = '1';
+                navbar.style.opacity = '1';
+                
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 1000);
+            }
+
+            // Start the sequence
+            function runSequence() {
+                // 1. Text fades in
+                animationTimeouts.push(setTimeout(() => {
+                    text.style.opacity = '1';
+                    // Text shake effect
+                    text.style.transform = 'translate(1px, 1px)';
+                    setInterval(() => {
+                        const rx = Math.random() * 2 - 1;
+                        const ry = Math.random() * 2 - 1;
+                        text.style.transform = `translate(${rx}px, ${ry}px)`;
+                    }, 50);
+                }, 500));
+
+                // 2. Eye opens
+                animationTimeouts.push(setTimeout(() => {
+                    eye.classList.add('active');
+                }, 1500));
+
+                // 3. Shrine Gate (Ribs) appear
+                animationTimeouts.push(setTimeout(() => {
+                    ribs.forEach(rib => rib.classList.add('active'));
+                }, 2200));
+
+                // 4. "Slash" / Cleave Effect (White flash)
+                animationTimeouts.push(setTimeout(() => {
+                    const flash = document.createElement('div');
+                    flash.style.position = 'fixed';
+                    flash.style.inset = '0';
+                    flash.style.background = 'white';
+                    flash.style.zIndex = '10001';
+                    flash.style.opacity = '0';
+                    flash.style.transition = 'opacity 0.1s';
+                    document.body.appendChild(flash);
+                    
+                    // Flash ON
+                    setTimeout(() => flash.style.opacity = '1', 10);
+                    // Flash OFF
+                    setTimeout(() => {
+                        flash.style.opacity = '0';
+                        finishIntro(); // End animation here
+                    }, 300);
+                    
+                    // Create slash lines
+                    for(let i=0; i<5; i++) {
+                        let slash = document.createElement('div');
+                        slash.className = 'cleave-line';
+                        slash.style.width = '120vw';
+                        slash.style.height = '2px';
+                        slash.style.top = Math.random() * 100 + 'vh';
+                        slash.style.left = '-10vw';
+                        slash.style.transform = `rotate(${Math.random() * 45 - 22}deg)`;
+                        document.body.appendChild(slash);
+                        
+                        // Animate slash
+                        setTimeout(() => slash.remove(), 500);
+                    }
+
+                }, 3500));
+            }
+
+            // Bind Skip
+            skipBtn.addEventListener('click', finishIntro);
+
+            // Run
+            runSequence();
+        });
+
+        // --- 2. Smooth Scroll ---
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if(section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- 3. Scroll Reveal Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- 4. 🔮 Shikigami Chat Logic (Gemini API) ---
+        const toggleBtn = document.getElementById('shikigami-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const messagesContainer = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        
+        // Use an empty string for the API key; the environment will supply it.
+        const apiKey = ""; 
+
+        // Portfolio Context for the AI
+        const portfolioContext = `
+            You are a Shikigami (spirit guide) for Jeevan Reddy T's portfolio.
+            The portfolio theme is "Malevolent Shrine" from Jujutsu Kaisen (dark, red, cursed energy).
+            Speak with a slight aura of power, arrogance, yet helpfulness. Use terms like "Sorcerer", "Cursed Technique", "Domain".
+            
+            About Jeevan Reddy T:
+            - Role: B.Tech Computer Science Engineering Student (Graduating 2026).
+            - Specializations: Data Structures & Algorithms (DSA), Blockchain Development, Competitive Programming.
+            - Links: LinkedIn, GitHub, LeetCode (handles provided in context).
+            - Resume is available for download on the site.
+            
+            Goal: Answer visitor questions about Jeevan's skills and background. 
+            If asked about something unrelated to Jeevan or tech, say "That is outside this Domain's jurisdiction."
+            Keep answers concise (under 3 sentences).
+        `;
+
+        toggleBtn.addEventListener('click', () => {
+            chatWindow.classList.toggle('open');
+            if(chatWindow.classList.contains('open')) userInput.focus();
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('open');
+        });
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // 1. Add User Message
+            addMessage(text, 'user');
+            userInput.value = '';
+
+            // 2. Add Loading State
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('chat-message', 'bot', 'loading-dots');
+            loadingDiv.innerText = "Gathering Cursed Energy";
+            messagesContainer.appendChild(loadingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            try {
+                // If no API key is configured, respond locally so the button still "works"
+                if (!apiKey) {
+                    messagesContainer.removeChild(loadingDiv);
+                    addMessage(
+                        "This Shikigami is currently bound by an incomplete pact (no API key set). " +
+                        "Ask the sorcerer to configure the key, but know that his skills in DSA, blockchain, and competitive programming are formidable.",
+                        'bot'
+                    );
+                    return;
+                }
+
+                // 3. Call Gemini API
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: text }]
+                        }],
+                        systemInstruction: {
+                            parts: [{ text: portfolioContext }]
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Remove loading
+                messagesContainer.removeChild(loadingDiv);
+
+                if (data.candidates && data.candidates[0].content) {
+                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    addMessage(aiResponse, 'bot');
+                } else {
+                    addMessage("The connection to the void was interrupted. Try again.", 'bot');
+                }
+
+            } catch (error) {
+                messagesContainer.removeChild(loadingDiv);
+                addMessage("A cursed technique blocked my path. (Error connecting)", 'bot');
+                console.error(error);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-message', sender);
+            msgDiv.innerText = text;
+            messagesContainer.appendChild(msgDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+    </script>
+</body>
+</html>
