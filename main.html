@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Nosifer&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Nosifer&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -29,15 +32,18 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             /* Hide scrollbar during intro */
-            overflow-y: hidden; 
+            overflow-y: hidden;
         }
-        
+
         body.intro-finished {
             overflow-y: auto;
             cursor: crosshair;
         }
 
-        h1, h2, h3, .cursed-font {
+        h1,
+        h2,
+        h3,
+        .cursed-font {
             font-family: 'Cinzel', serif;
         }
 
@@ -90,18 +96,22 @@
         .shrine-eye::after {
             content: '';
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%; height: 20%;
+            width: 80%;
+            height: 20%;
             background: #000;
-            opacity: 0; /* Eyelid opens */
+            opacity: 0;
+            /* Eyelid opens */
             transition: 0.3s;
         }
 
         /* 2. The Ribs (Shrine Gate) */
         .shrine-rib {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%) scale(0.5);
             border: 5px solid #4a0000;
             border-bottom: none;
@@ -136,13 +146,15 @@
             transform: scale(1.5);
             transition: transform 0.2s;
         }
-        
+
         .intro-text-en {
             font-family: 'Nosifer', cursive;
             color: white;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            /* Responsive font size */
             text-shadow: 0 0 10px red;
-            margin-top: -20px;
+            margin-top: 0;
+            /* Adjusted since JP text is gone */
         }
 
         /* 4. The Slash (Cleave) */
@@ -156,14 +168,25 @@
 
         /* Animation Keyframes for Sequence */
         @keyframes shockwave {
-            0% { transform: scale(1); border-width: 2px; opacity: 1; }
-            100% { transform: scale(20); border-width: 0; opacity: 0; }
+            0% {
+                transform: scale(1);
+                border-width: 2px;
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(20);
+                border-width: 0;
+                opacity: 0;
+            }
         }
 
         .shockwave {
             position: absolute;
-            top: 50%; left: 50%;
-            width: 10px; height: 10px;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
             border: 2px solid white;
             border-radius: 50%;
             transform: translate(-50%, -50%);
@@ -196,13 +219,16 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #000;
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--dark-red);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--cursed-red);
         }
@@ -217,7 +243,9 @@
             position: relative;
             color: white;
         }
-        .glitch::before, .glitch::after {
+
+        .glitch::before,
+        .glitch::after {
             content: attr(data-text);
             position: absolute;
             top: 0;
@@ -226,12 +254,14 @@
             height: 100%;
             background: var(--black);
         }
+
         .glitch::before {
             left: 2px;
             text-shadow: -1px 0 red;
             clip: rect(24px, 550px, 90px, 0);
             animation: glitch-anim-2 3s infinite linear alternate-reverse;
         }
+
         .glitch::after {
             left: -2px;
             text-shadow: -1px 0 blue;
@@ -240,22 +270,50 @@
         }
 
         @keyframes glitch-anim {
-            0% { clip: rect(14px, 9999px, 127px, 0); }
-            20% { clip: rect(80px, 9999px, 13px, 0); }
-            40% { clip: rect(30px, 9999px, 86px, 0); }
-            60% { clip: rect(69px, 9999px, 148px, 0); }
-            80% { clip: rect(2px, 9999px, 20px, 0); }
-            100% { clip: rect(110px, 9999px, 130px, 0); }
+            0% {
+                clip: rect(14px, 9999px, 127px, 0);
+            }
+
+            20% {
+                clip: rect(80px, 9999px, 13px, 0);
+            }
+
+            40% {
+                clip: rect(30px, 9999px, 86px, 0);
+            }
+
+            60% {
+                clip: rect(69px, 9999px, 148px, 0);
+            }
+
+            80% {
+                clip: rect(2px, 9999px, 20px, 0);
+            }
+
+            100% {
+                clip: rect(110px, 9999px, 130px, 0);
+            }
         }
+
         @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); }
-            100% { clip: rect(10px, 9999px, 60px, 0); }
+            0% {
+                clip: rect(65px, 9999px, 100px, 0);
+            }
+
+            100% {
+                clip: rect(10px, 9999px, 60px, 0);
+            }
         }
 
         /* Subtle orbit animation for hero rings */
         @keyframes spin-orbit {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         /* --- Card Styles --- */
@@ -267,7 +325,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .cursed-card:hover {
             border-color: var(--cursed-red);
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
@@ -284,7 +342,7 @@
             transition: 0.3s;
             z-index: 10;
         }
-        
+
         .btn-domain::after {
             content: '';
             position: absolute;
@@ -312,16 +370,18 @@
             transform: translateY(30px);
             transition: all 0.8s ease-out;
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Photo Glow */
         .photo-glow {
             position: relative;
             display: inline-block;
         }
+
         .photo-glow::after {
             content: '';
             position: absolute;
@@ -331,9 +391,15 @@
             filter: blur(10px);
             animation: rotateGlow 3s linear infinite;
         }
+
         @keyframes rotateGlow {
-            0% { filter: hue-rotate(0deg) blur(10px); }
-            100% { filter: hue-rotate(360deg) blur(10px); }
+            0% {
+                filter: hue-rotate(0deg) blur(10px);
+            }
+
+            100% {
+                filter: hue-rotate(360deg) blur(10px);
+            }
         }
 
         /* Mobile typography tweaks */
@@ -471,30 +537,85 @@
         }
 
         @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60% { content: '...'; }
-            80%, 100% { content: ''; }
+
+            0%,
+            20% {
+                content: '.';
+            }
+
+            40% {
+                content: '..';
+            }
+
+            60% {
+                content: '...';
+            }
+
+            80%,
+            100% {
+                content: '';
+            }
         }
 
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 39;
+            /* Behind navbar (40) */
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu-overlay.open {
+            transform: translateX(0);
+        }
+
+        .mobile-link {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .mobile-link:hover {
+            color: var(--cursed-red);
+        }
     </style>
 </head>
+
 <body class="antialiased selection:bg-red-900 selection:text-white">
 
     <!-- 🎥 ANIMATED INTRO SECTION (CSS Generated) -->
     <div id="intro-overlay">
         <!-- The Shrine Eye -->
         <div id="shrine-eye" class="shrine-eye"></div>
-        
+
         <!-- The Shrine Ribs (Gate) -->
-        <div class="shrine-rib" style="width: 300px; height: 300px; border-width: 4px;"></div>
-        <div class="shrine-rib" style="width: 500px; height: 500px; border-width: 8px; transition-delay: 0.1s;"></div>
-        <div class="shrine-rib" style="width: 700px; height: 700px; border-width: 12px; transition-delay: 0.2s;"></div>
-        <div class="shrine-rib" style="width: 1200px; height: 1200px; border-width: 20px; border-color: #ff0000; opacity: 0; transition-delay: 0.3s;"></div>
+        <!-- The Shrine Ribs (Gate) - Using vmin for responsiveness -->
+        <div class="shrine-rib" style="width: 30vmin; height: 30vmin; border-width: 4px;"></div>
+        <div class="shrine-rib" style="width: 50vmin; height: 50vmin; border-width: 8px; transition-delay: 0.1s;"></div>
+        <div class="shrine-rib" style="width: 70vmin; height: 70vmin; border-width: 12px; transition-delay: 0.2s;">
+        </div>
+        <div class="shrine-rib"
+            style="width: 120vmin; height: 120vmin; border-width: 20px; border-color: #ff0000; opacity: 0; transition-delay: 0.3s;">
+        </div>
 
         <!-- Text Overlay -->
         <div id="intro-text" class="intro-text-container">
-            <div class="intro-text-jp">領域展開</div>
+            <!-- JP Text Removed as requested -->
             <div class="intro-text-en">DOMAIN EXPANSION</div>
         </div>
 
@@ -502,22 +623,47 @@
     </div>
 
     <!-- Navigation (Hidden initially, shown after intro) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center backdrop-blur-sm bg-black/50 border-b border-red-900/30 opacity-0 transition-opacity duration-1000">
-        <span class="text-xl font-bold tracking-widest text-red-600">JR.</span>
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-40 px-6 py-4 flex justify-between items-center backdrop-blur-sm bg-black/50 border-b border-red-900/30 opacity-0 transition-opacity duration-1000">
+        <span class="text-xl font-bold tracking-widest text-red-600 z-50">JR.</span>
+
+        <!-- Desktop Nav -->
         <div class="space-x-6 text-sm md:text-base hidden md:block">
             <a href="#about" class="hover:text-red-500 transition-colors">Archive</a>
+            <a href="#hobbies" class="hover:text-red-500 transition-colors">Interests</a>
             <a href="#skills" class="hover:text-red-500 transition-colors">Techniques</a>
+            <a href="#certifications" class="hover:text-red-500 transition-colors">Mastery</a>
             <a href="#connect" class="hover:text-red-500 transition-colors">Pact</a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="mobile-menu-btn" class="md:hidden z-50 text-white focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu-overlay md:hidden">
+            <a href="#about" class="mobile-link" onclick="toggleMobileMenu()">Archive</a>
+            <a href="#hobbies" class="mobile-link" onclick="toggleMobileMenu()">Interests</a>
+            <a href="#skills" class="mobile-link" onclick="toggleMobileMenu()">Techniques</a>
+            <a href="#certifications" class="mobile-link" onclick="toggleMobileMenu()">Mastery</a>
+            <a href="#connect" class="mobile-link" onclick="toggleMobileMenu()">Pact</a>
+            <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing" target="_blank"
+                class="mobile-link text-red-500 border-b border-red-500 pb-1">Resume</a>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <header id="hero" class="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden domain-bg opacity-0 transition-opacity duration-1000">
-        
+    <header id="hero"
+        class="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden domain-bg opacity-0 transition-opacity duration-1000">
+
         <!-- Abstract CSS Background (replaces particles for cleaner look post-video) -->
         <div class="absolute inset-0 z-0 opacity-40">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vh] h-[80vh] border border-red-900/30 rounded-full animate-pulse"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] border border-red-800/20 rounded-full" style="animation: spin-orbit 18s linear infinite;"></div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vh] h-[80vh] border border-red-900/30 rounded-full animate-pulse">
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] border border-red-800/20 rounded-full"
+                style="animation: spin-orbit 18s linear infinite;"></div>
         </div>
 
         <!-- Main Content -->
@@ -525,11 +671,11 @@
             <p class="text-red-500 tracking-[0.3em] text-sm md:text-lg mb-4 uppercase">
                 System Logic Override
             </p>
-            
+
             <h1 class="text-5xl md:text-8xl font-black mb-2 glitch uppercase" data-text="Domain Expansion">
                 Domain Expansion
             </h1>
-            
+
             <h2 class="text-2xl md:text-4xl text-gray-300 font-light mb-6 cursed-font">
                 Malevolent <span class="text-red-600 font-bold">Code</span>
             </h2>
@@ -538,14 +684,18 @@
 
             <div class="text-center mb-10">
                 <h3 class="text-xl md:text-3xl font-bold text-white mb-2">JEEVAN REDDY T</h3>
-                <p class="text-gray-400">B.Tech CSE Student | <span class="text-red-500">Turning Logic Into Power</span></p>
+                <p class="text-gray-400">B.Tech CSE Student | <span class="text-red-500">Turning Logic Into Power</span>
+                </p>
             </div>
 
             <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <button onclick="scrollToSection('skills')" class="btn-domain px-8 py-3 font-bold tracking-widest uppercase text-sm cursor-pointer">
+                <button onclick="scrollToSection('skills')"
+                    class="btn-domain px-8 py-3 font-bold tracking-widest uppercase text-sm cursor-pointer">
                     Enter My Domain
                 </button>
-                <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing" target="_blank" class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors border-b border-transparent hover:border-red-500 pb-1">
+                <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing"
+                    target="_blank"
+                    class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors border-b border-transparent hover:border-red-500 pb-1">
                     <i class="fa-solid fa-file-pdf text-red-500 group-hover:animate-bounce"></i>
                     View Resume
                 </a>
@@ -562,41 +712,123 @@
     <section id="about" class="relative py-20 px-6 bg-black border-t border-red-900/20">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-                
+
                 <!-- 📷 PROFILE PHOTO -->
                 <div class="reveal flex justify-center md:justify-end">
                     <div class="photo-glow rounded-lg">
                         <!-- UPDATED: Replaced with the uploaded file name -->
-                        <img 
-                            src="jeevan_passport size photo.png" 
-                            alt="Jeevan Reddy T" 
-                            class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg border-2 border-red-900 grayscale hover:grayscale-0 transition-all duration-500"
-                            onerror="this.src='https://ui-avatars.com/api/?name=Jeevan+Reddy&background=330000&color=ff0000&size=256'"
-                        >
+                        <img src="jeevan_passport size photo.png" alt="Jeevan Reddy T"
+                            class="w-48 md:w-64 h-auto object-contain rounded-lg border-2 border-red-900 grayscale hover:grayscale-0 transition-all duration-500"
+                            onerror="this.src='https://ui-avatars.com/api/?name=Jeevan+Reddy&background=330000&color=ff0000&size=256'">
                     </div>
                 </div>
 
                 <!-- Text Content -->
                 <div class="md:col-span-2 reveal">
-                    <h2 class="text-4xl font-bold text-white mb-4 cursed-font"><span class="text-red-600">Sorcerer</span> Profile</h2>
+                    <h2 class="text-4xl font-bold text-white mb-4 cursed-font"><span
+                            class="text-red-600">Sorcerer</span> Profile</h2>
                     <h3 class="text-2xl font-bold mb-4 text-gray-300">Jeevan Reddy T</h3>
                     <p class="text-gray-400 leading-relaxed mb-6">
-                        As a Computer Science Engineering student, I don't just write code; I construct logic. 
-                        My domain specializes in untangling complex algorithmic knots and forging immutable ledgers on the blockchain.
+                        As a Computer Science Engineering student, I don't just write code; I construct logic.
+                        My domain specializes in untangling complex algorithmic knots and forging immutable ledgers on
+                        the blockchain.
                         Like a sorcerer refining their cursed energy, I refine data structures for optimal performance.
                     </p>
-                    
+
                     <div class="flex gap-4">
-                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                        <div
+                            class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
                             CSE 2027
                         </div>
-                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                        <div
+                            class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
                             Blockchain
                         </div>
-                        <div class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
+                        <div
+                            class="px-4 py-2 border border-red-900/50 rounded bg-red-900/10 text-red-400 text-sm font-bold">
                             DSA
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOBBIES SECTION -->
+    <section id="hobbies" class="py-16 px-6 bg-[#050000] border-t border-red-900/20">
+        <div class="max-w-6xl mx-auto reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 cursed-font text-center">
+                Mundanities & <span class="text-red-600">Leisure</span>
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Cricket -->
+                <div class="cursed-card p-6 rounded-lg text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 mx-auto bg-black border border-red-900 rounded-full flex items-center justify-center mb-4 group-hover:shadow-[0_0_15px_red] transition-shadow">
+                        <i class="fa-solid fa-baseball-bat-ball text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Cricket</h3>
+                    <p class="text-gray-400 text-xs">Strategic gameplay & team coordination.</p>
+                </div>
+
+                <!-- Swimming -->
+                <div class="cursed-card p-6 rounded-lg text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 mx-auto bg-black border border-red-900 rounded-full flex items-center justify-center mb-4 group-hover:shadow-[0_0_15px_red] transition-shadow">
+                        <i class="fa-solid fa-person-swimming text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Swimming</h3>
+                    <p class="text-gray-400 text-xs">Endurance & fluid motion control.</p>
+                </div>
+
+                <!-- Gaming -->
+                <div class="cursed-card p-6 rounded-lg text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 mx-auto bg-black border border-red-900 rounded-full flex items-center justify-center mb-4 group-hover:shadow-[0_0_15px_red] transition-shadow">
+                        <i class="fa-solid fa-gamepad text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Gaming</h3>
+                    <p class="text-gray-400 text-xs">Free Fire & mobile competitive rankings.</p>
+                </div>
+
+                <!-- Movies -->
+                <div class="cursed-card p-6 rounded-lg text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 mx-auto bg-black border border-red-900 rounded-full flex items-center justify-center mb-4 group-hover:shadow-[0_0_15px_red] transition-shadow">
+                        <i class="fa-solid fa-film text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Cinema</h3>
+                    <p class="text-gray-400 text-xs">Exploring narratives & visual storytelling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="py-16 px-6 bg-[#050000] border-t border-red-900/20">
+        <div class="max-w-6xl mx-auto reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 cursed-font">
+                Academy of <span class="text-red-600">Formation</span>
+            </h2>
+            <div
+                class="cursed-card rounded-lg p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h3 class="text-2xl font-semibold text-white mb-1">
+                        Indian Institute of Information Technology, Gwalior
+                    </h3>
+                    <p class="text-gray-300 mb-2">
+                        Bachelor of Computer Science and Engineering
+                    </p>
+                    <p class="text-gray-500 text-sm">
+                        2023 – 2027 · Gwalior, Madhya Pradesh, India
+                    </p>
+                </div>
+                <div class="text-right md:text-center">
+                    <span
+                        class="inline-block px-4 py-2 border border-red-900/60 rounded bg-red-900/20 text-red-300 text-xs md:text-sm font-bold tracking-wide uppercase">
+                        Undergrad Sorcerer in Training
+                    </span>
                 </div>
             </div>
         </div>
@@ -606,9 +838,10 @@
     <section id="skills" class="relative py-20 px-6 bg-[#0a0000]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 cursed-font">Cursed <span class="text-red-600">Techniques</span></h2>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 cursed-font">Cursed <span
+                        class="text-red-600">Techniques</span></h2>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
                 <!-- Card 1 -->
                 <div class="cursed-card p-6 rounded-lg group">
@@ -646,13 +879,162 @@
         </div>
     </section>
 
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications" class="relative py-20 px-6 bg-black border-t border-red-900/20">
+        <div class="max-w-6xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 cursed-font">Seals of <span
+                        class="text-red-600">Mastery</span></h2>
+                <p class="text-gray-400">Verified knowledge extracted from the void.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Flipkart GRID -->
+                <div class="cursed-card p-6 rounded-lg flex flex-col items-center text-center gap-4 group">
+                    <div
+                        class="w-16 h-16 shrink-0 bg-yellow-900/10 rounded-full flex items-center justify-center border border-yellow-600/30 group-hover:border-yellow-600 transition-colors">
+                        <i class="fa-solid fa-trophy text-3xl text-yellow-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-1">Flipkart GRID 7.0</h3>
+                        <p class="text-yellow-500 text-sm mb-3">National Semi Finalist</p>
+                        <a href="https://drive.google.com/file/d/1ap-dt4LQjm4JqqJSze9Zhgdo2cyA26pN/view?usp=sharing"
+                            target="_blank"
+                            class="text-gray-400 text-xs hover:text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cyfrin Updraft -->
+                <div class="cursed-card p-6 rounded-lg flex flex-col items-center text-center gap-4 group">
+                    <div
+                        class="w-16 h-16 shrink-0 bg-white/10 rounded-full flex items-center justify-center border border-red-500/30 group-hover:border-red-500 transition-colors">
+                        <i class="fa-solid fa-scroll text-3xl text-red-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-1">Blockchain Basics</h3>
+                        <p class="text-red-400 text-sm mb-3">Cyfrin Updraft</p>
+                        <a href="https://updraft.cyfrin.io/courses/blockchain-basics/final/proficiency-exam"
+                            target="_blank"
+                            class="text-gray-400 text-xs hover:text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-external-link-alt"></i> Verify Seal
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LinkedIn More -->
+                <div class="cursed-card p-6 rounded-lg flex flex-col items-center text-center gap-4 group">
+                    <div
+                        class="w-16 h-16 shrink-0 bg-[#0077b5]/10 rounded-full flex items-center justify-center border border-[#0077b5]/30 group-hover:border-[#0077b5] transition-colors">
+                        <i class="fa-brands fa-linkedin-in text-3xl text-[#0077b5]"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-1">More Certifications</h3>
+                        <p class="text-[#0077b5] text-sm mb-3">LinkedIn Profile</p>
+                        <a href="https://www.linkedin.com/in/jeevan-reddy-t/details/certifications/" target="_blank"
+                            class="text-gray-400 text-xs hover:text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-external-link-alt"></i> View Collection
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="relative py-20 px-6 bg-black border-t border-red-900/20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-3 cursed-font">
+                    Domain <span class="text-red-600">Projects</span>
+                </h2>
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">
+                    Real-world incantations where algorithms, systems design, and C++ craftsmanship converge.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+                <!-- BookMyShow Clone -->
+                <div class="cursed-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">BookMyShow Web Platform</h3>
+                        <p class="text-xs text-red-400 mb-3">React · Node.js · Express · MySQL · MongoDB</p>
+                        <p class="text-gray-300 text-sm mb-3">
+                            Full‑stack ticket booking system with secure authentication, real‑time seat selection,
+                            and RESTful APIs for shows and bookings.
+                        </p>
+                        <p class="text-gray-500 text-xs">
+                            Designed using Agile workflow, Draw.io/Figma diagrams, and tested for scalability to handle
+                            500+ concurrent users.
+                        </p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://github.com/jeevan1978/BOOKMYSHOW" target="_blank"
+                            class="text-red-400 text-xs hover:text-red-300 underline underline-offset-4">
+                            View project on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hotel Management System -->
+                <div class="cursed-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Hotel Management System</h3>
+                        <p class="text-xs text-red-400 mb-3">C++ · OOP</p>
+                        <p class="text-gray-300 text-sm mb-3">
+                            Console‑based hotel reservation system with separate client and admin flows,
+                            authentication, and robust error‑handled menus.
+                        </p>
+                        <p class="text-gray-500 text-xs">
+                            Built with modular components such as <span class="italic">Account</span>, <span
+                                class="italic">HRS</span>, and
+                            <span class="italic">ReservationSystem</span> for scalable, reusable code.
+                        </p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://github.com/jeevan1978/Hotel-Management-System---OOPs-C-" target="_blank"
+                            class="text-red-400 text-xs hover:text-red-300 underline underline-offset-4">
+                            View project on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Huffman Compressor -->
+                <div class="cursed-card rounded-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Huffman Compressor & Decompressor</h3>
+                        <p class="text-xs text-red-400 mb-3">C++ · Algorithms</p>
+                        <p class="text-gray-300 text-sm mb-3">
+                            Command‑line tool implementing Huffman Coding for lossless text compression and
+                            decompression
+                            using dynamically built Huffman Trees.
+                        </p>
+                        <p class="text-gray-500 text-xs">
+                            Handles binary file I/O, frequency analysis, and precise reconstruction of encoded data.
+                        </p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://github.com/jeevan1978/FileCompressor-Huffman-Coding" target="_blank"
+                            class="text-red-400 text-xs hover:text-red-300 underline underline-offset-4">
+                            View project on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CONNECT / CONTACT SECTION -->
     <section id="connect" class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-900/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-900/10 blur-[100px] rounded-full pointer-events-none">
+        </div>
 
         <div class="max-w-5xl mx-auto relative z-10 reveal">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-6xl font-bold mb-4 uppercase glitch" data-text="Form A Pact">Form A Pact</h2>
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 uppercase glitch" data-text="Form A Pact">Form A Pact
+                </h2>
                 <p class="text-xl text-gray-300">Reach out for collaborations, internships, or projects.</p>
             </div>
 
@@ -664,7 +1046,8 @@
                     <div class="space-y-3 text-gray-300 text-sm md:text-base">
                         <p>
                             <span class="font-semibold text-red-400">Email:</span>
-                            <a href="mailto:tjreddy291@gamil.com" class="hover:text-red-400 underline underline-offset-4">
+                            <a href="mailto:tjreddy291@gamil.com"
+                                class="hover:text-red-400 underline underline-offset-4">
                                 tjreddy291@gamil.com
                             </a>
                         </p>
@@ -684,22 +1067,27 @@
                 <div class="flex flex-col items-center justify-center gap-6">
                     <div class="flex flex-wrap justify-center gap-4">
                         <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                        <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank"
+                            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
                             <i class="fa-brands fa-linkedin-in text-xl md:text-2xl"></i>
                         </a>
-                        
+
                         <!-- GitHub -->
-                        <a href="https://github.com/jeevan1978" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                        <a href="https://github.com/jeevan1978" target="_blank"
+                            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
                             <i class="fa-brands fa-github text-xl md:text-2xl"></i>
                         </a>
 
                         <!-- LeetCode -->
-                        <a href="https://leetcode.com/u/jeevan2006/" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
+                        <a href="https://leetcode.com/u/jeevan2006/" target="_blank"
+                            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-red-600 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_red]">
                             <i class="fa-solid fa-code text-lg md:text-xl"></i>
                         </a>
                     </div>
 
-                    <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing" target="_blank" class="btn-domain px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm">
+                    <a href="https://drive.google.com/file/d/1OhJUF7v1Un2qTCTRxLw47eUbaT8W3G6v/view?usp=sharing"
+                        target="_blank"
+                        class="btn-domain px-6 py-3 font-bold uppercase tracking-widest text-xs md:text-sm">
                         Download Resume
                     </a>
                 </div>
@@ -708,26 +1096,39 @@
             <!-- Achievements preview -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="cursed-card rounded-lg p-6">
-                    <h3 class="text-xl font-bold text-white mb-2">Highlights</h3>
-                    <p class="text-gray-400 text-sm mb-3">
-                        A snapshot of achievements and milestones. For the full cursed record, explore the LinkedIn profile.
+                    <h3 class="text-xl font-bold text-white mb-3">Achievements</h3>
+                    <ul class="list-disc list-inside text-gray-300 text-sm space-y-1">
+                        <li>LeetCode acceptance rate above <span class="font-semibold text-red-400">80%</span>.</li>
+                        <li>Solved <span class="font-semibold text-red-400">200+ DSA problems</span> across coding
+                            platforms.</li>
+                        <li><span class="font-semibold text-red-400">Flipkart GRID 7.0</span> National Semi Finalist.
+                        </li>
+                    </ul>
+                </div>
+                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
+                    <h4 class="font-semibold text-white mb-2">Technical Arsenal</h4>
+                    <p class="mb-1">
+                        <span class="text-red-400 font-semibold">Languages:</span> C, C++, SQL, Solidity, Python
                     </p>
-                    <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank" class="inline-flex items-center gap-2 text-red-400 text-sm hover:text-red-300 underline underline-offset-4">
+                    <p class="mb-1">
+                        <span class="text-red-400 font-semibold">Core:</span> DBMS, OOPS, DSA, Computer Networks,
+                        Operating Systems
+                    </p>
+                    <p>
+                        <span class="text-red-400 font-semibold">Focus Areas:</span> Smart Contract Development, Machine
+                        Learning, Quantitative Finance
+                    </p>
+                </div>
+                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
+                    <h4 class="font-semibold text-white mb-2">More on LinkedIn</h4>
+                    <p class="mb-3">
+                        Certificates, detailed timelines, and additional milestones are curated on my LinkedIn profile.
+                    </p>
+                    <a href="https://www.linkedin.com/in/jeevan-reddy-t" target="_blank"
+                        class="inline-flex items-center gap-2 text-red-400 text-sm hover:text-red-300 underline underline-offset-4">
                         <i class="fa-brands fa-linkedin-in"></i>
                         View complete achievement timeline
                     </a>
-                </div>
-                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
-                    <h4 class="font-semibold text-white mb-2">Technical Growth</h4>
-                    <p>
-                        Consistent practice in DSA, blockchain fundamentals, and competitive programming, reflected through problem-solving activity and projects shared on LinkedIn and GitHub.
-                    </p>
-                </div>
-                <div class="cursed-card rounded-lg p-6 text-sm text-gray-300">
-                    <h4 class="font-semibold text-white mb-2">Community & Learning</h4>
-                    <p>
-                        Participating in online courses, hackathons, and coding communities. Details and certificates are curated on the LinkedIn profile.
-                    </p>
                 </div>
             </div>
         </div>
@@ -759,7 +1160,8 @@
             </div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="user-input" class="chat-input" placeholder="Ask a question..." onkeydown="if(event.key === 'Enter') sendMessage()">
+            <input type="text" id="user-input" class="chat-input" placeholder="Ask a question..."
+                onkeydown="if(event.key === 'Enter') sendMessage()">
             <button onclick="sendMessage()" class="text-red-600 hover:text-white px-2">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
@@ -775,7 +1177,7 @@
             const ribs = document.querySelectorAll('.shrine-rib');
             const text = document.getElementById('intro-text');
             const skipBtn = document.getElementById('skip-btn');
-            
+
             const hero = document.getElementById('hero');
             const navbar = document.getElementById('navbar');
 
@@ -788,11 +1190,11 @@
 
                 overlay.classList.add('fade-out');
                 document.body.classList.add('intro-finished');
-                
+
                 // Fade in main elements
                 hero.style.opacity = '1';
                 navbar.style.opacity = '1';
-                
+
                 setTimeout(() => {
                     overlay.style.display = 'none';
                 }, 1000);
@@ -832,17 +1234,18 @@
                     flash.style.opacity = '0';
                     flash.style.transition = 'opacity 0.1s';
                     document.body.appendChild(flash);
-                    
+
                     // Flash ON
                     setTimeout(() => flash.style.opacity = '1', 10);
                     // Flash OFF
                     setTimeout(() => {
                         flash.style.opacity = '0';
+                        flash.remove(); // Remove element to unblock clicks
                         finishIntro(); // End animation here
                     }, 300);
-                    
+
                     // Create slash lines
-                    for(let i=0; i<5; i++) {
+                    for (let i = 0; i < 5; i++) {
                         let slash = document.createElement('div');
                         slash.className = 'cleave-line';
                         slash.style.width = '120vw';
@@ -851,7 +1254,7 @@
                         slash.style.left = '-10vw';
                         slash.style.transform = `rotate(${Math.random() * 45 - 22}deg)`;
                         document.body.appendChild(slash);
-                        
+
                         // Animate slash
                         setTimeout(() => slash.remove(), 500);
                     }
@@ -864,12 +1267,35 @@
 
             // Run
             runSequence();
+
         });
+
+        // --- Mobile Menu Logic ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.add('open');
+                mobileBtn.innerHTML = '<i class="fa-solid fa-xmark text-2xl"></i>';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                mobileMenu.classList.remove('open');
+                mobileBtn.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', toggleMobileMenu);
+        }
 
         // --- 2. Smooth Scroll ---
         function scrollToSection(id) {
             const section = document.getElementById(id);
-            if(section) {
+            if (section) {
                 section.scrollIntoView({ behavior: 'smooth' });
             }
         }
@@ -893,9 +1319,9 @@
         const closeChat = document.getElementById('close-chat');
         const messagesContainer = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
-        
+
         // Use an empty string for the API key; the environment will supply it.
-        const apiKey = ""; 
+        const apiKey = "";
 
         // Portfolio Context for the AI
         const portfolioContext = `
@@ -916,7 +1342,7 @@
 
         toggleBtn.addEventListener('click', () => {
             chatWindow.classList.toggle('open');
-            if(chatWindow.classList.contains('open')) userInput.focus();
+            if (chatWindow.classList.contains('open')) userInput.focus();
         });
 
         closeChat.addEventListener('click', () => {
@@ -965,7 +1391,7 @@
                 });
 
                 const data = await response.json();
-                
+
                 // Remove loading
                 messagesContainer.removeChild(loadingDiv);
 
@@ -993,4 +1419,5 @@
 
     </script>
 </body>
+
 </html>
